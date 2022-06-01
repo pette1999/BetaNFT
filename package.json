@@ -1,0 +1,26 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@nomiclabs/buidler": "^1.4.8",
+    "@nomiclabs/hardhat-ethers": "^2.0.4",
+    "@nomiclabs/hardhat-etherscan": "^3.0.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.2",
+    "chai": "^4.2.0",
+    "erc721a-upgradeable": "^0.0.0",
+    "ethereum-waffle": "^3.0.0",
+    "ethers": "^5.6.8",
+    "hardhat": "^2.8.3"
+  },
+  "dependencies": {
+    "@ethereumjs/common": "^2.6.4",
+    "@ethereumjs/tx": "^3.5.1",
+    "@openzeppelin/contract-loader": "^0.6.3",
+    "@openzeppelin/contracts": "^4.1.0",
+    "@openzeppelin/contracts-upgradeable": "^4.1.0",
+    "@openzeppelin/hardhat-upgrades": "^1.13.0",
+    "bn.js": "^5.2.1",
+    "dotenv": "^16.0.0",
+    "ethereumjs-tx": "^2.1.2",
+    "web3": "^1.7.3"
+  }
+}

@@ -20,6 +20,7 @@ contract BetaTest is ERC721AUpgradeable, OwnableUpgradeable {
     string public baseExtension;
     string public baseTokenURI;
     bool public paused;
+    bool public locked;
 
     function initialize() public initializer {
         __Ownable_init();
@@ -32,10 +33,15 @@ contract BetaTest is ERC721AUpgradeable, OwnableUpgradeable {
         baseTokenURI = "ipfs://QmVMNHDpfFNpuwSHbGbKpNNFZNMJNpDDvZaeVQpuEmikNZ/";
         baseExtension = ".json";
         paused = false;
+        locked = false;
     }
 
     function _baseURI() internal view virtual override returns (string memory) {
        return baseTokenURI;
+    }
+
+    function isLocked() public view returns(bool) {
+      return locked;
     }
 
     modifier isPaused() {
@@ -57,11 +63,21 @@ contract BetaTest is ERC721AUpgradeable, OwnableUpgradeable {
       MAX_SUPPLY = _newmaxMintAmount;
     }
 
+    // set lock for transfer
+    function setLocked(bool _locked) public onlyOwner {
+      locked = _locked;
+    }
+
     // set new base extension
     function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
       baseExtension = _newBaseExtension;
     }
 
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public override {
+      require(!locked, "The contract is locked!");
+      safeTransferFrom(from, to, tokenId, _data);
+    }
+    
     function togglePause() public onlyOwner {
       paused = !paused;
     }
@@ -78,11 +94,7 @@ contract BetaTest is ERC721AUpgradeable, OwnableUpgradeable {
       }
 
       for (uint256 i=1; i<=quantity_; i++) {
-        console.log("i: ", i);
-        console.log("supply: ", supply);
-        uint256 id = supply+i;
-        console.log("id: ", id);
-        _safeMint(to, id);
+        _safeMint(to, 1);
       }
     }
 

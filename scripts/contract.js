@@ -1,13 +1,15 @@
 const Web3 = require('web3');
 const { ethers, BigNumber } = require("ethers");
-const BN = require('bn.js');
 const contract_abi = require('../artifacts/contracts/BetaTest.sol/BetaTest.json')
+const dotenv = require("dotenv");
+const { ConsensusType } = require('@ethereumjs/common');
+dotenv.config();
 
-async function main() {
+async function main(proxyAddress) {
   HMY_TESTNET_RPC_URL = 'https://api.s0.b.hmny.io';
-  const account1 = '0x3868d285618A5B36083b555177D5E76141AaCCb4'
-  const account1Secret = '7f3177c29c485d3a8c7a0ae82e271258ceaa30b70639014eb90b1168af66692e'
-  const address = '0x82088D79BAF315A5A145559087083dD16fFD96Be'
+  const account1 = '0x271f70Ed8B8154010d06CE809D78f8A2665eFed9'
+  const account1Secret = process.env.REACT_APP_PRIVATE_KEY
+  const address = proxyAddress
   const abi = contract_abi['abi']
   // ethers.js
   // parse function
@@ -69,6 +71,7 @@ async function main() {
     const isLocked = await token.methods.isLocked().call()
     const baseTokenUri = await token.methods.baseTokenURI().call()
     const ownerBalance = await web3.eth.getBalance(account1)
+    const balanceOfowner = await token.methods.balanceOf('0x271f70Ed8B8154010d06CE809D78f8A2665eFed9').call()
     console.log(`NAME: ${name}`)
     console.log(`SYMBOL: ${symbol}`)
     console.log(`OWNER: ${owner}`)
@@ -77,6 +80,7 @@ async function main() {
     console.log(`IS LOCKED: ${isLocked}`)
     console.log(`BASETOKENURI: ${baseTokenUri}`)
     console.log(`OWNER BALANCE: ${WEB3fromWei(ownerBalance.toString())} ONE`)
+    console.log("BALANCE OF OWNER: ", balanceOfowner)
   }
   // mint NFT
   const mintNFT = async () => {
@@ -87,7 +91,7 @@ async function main() {
       "value": 230000000000000,
       'nonce': nonce,
       'gas': 500000,
-      'data': token.methods.safeMint("0xa3F592D1732b44C5adf34827BA9634a9aa5E679e", 1).encodeABI()
+      'data': token.methods.safeMint("0x271f70Ed8B8154010d06CE809D78f8A2665eFed9", 1).encodeABI()
     }
     const signPromise = web3.eth.accounts.signTransaction(tx, account1Secret)
     signPromise.then(async (signedTx) => {
@@ -108,10 +112,18 @@ async function main() {
     const res = await token.methods.setLocked(true).send({from: myAddress, gas: 500000})
     console.log(res)
   }
+
+  // set new token URI
+  const setTokenUri = async (uri) => {
+    const res = await token.methods.setBaseURI(uri).send({from: myAddress, gas: 500000})
+    console.log(res)
+  }
+
   // Call the mintNFT function
   // await mintNFT()
-  await web3_contractInfo()
+  // await web3_contractInfo()
+  await setTokenUri("ipfs://QmSUsofykmoLwA6zCHgVeG8YtkRZnDeKw48vCZadA3spxe/")
   // await lockTransfer()
 }
 
-main()
+main('0xE34084ca3f96901F2A7541c24AB0FCFF072c7081')

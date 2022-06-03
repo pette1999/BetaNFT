@@ -67,6 +67,7 @@ async function main(proxyAddress) {
     const symbol = await token.methods.symbol().call()
     const owner = await token.methods.owner().call()
     const totalSupply = await token.methods.totalSupply().call()
+    const isPaused = await token.methods.paused().call()
     const price = await token.methods.PRICE().call()
     const isLocked = await token.methods.isLocked().call()
     const baseTokenUri = await token.methods.baseTokenURI().call()
@@ -78,6 +79,7 @@ async function main(proxyAddress) {
     console.log(`TOTAL SUPPLY: ${totalSupply}`)
     console.log(`PRICE: ${price}`)
     console.log(`IS LOCKED: ${isLocked}`)
+    console.log(`Is PAUSED: ${isPaused}`)
     console.log(`BASETOKENURI: ${baseTokenUri}`)
     console.log(`OWNER BALANCE: ${WEB3fromWei(ownerBalance.toString())} ONE`)
     console.log("BALANCE OF OWNER: ", balanceOfowner)
@@ -132,10 +134,10 @@ async function main(proxyAddress) {
 
   // Call the mintNFT function
   // await mintNFT()
-  // await web3_contractInfo()
+  await web3_contractInfo()
   // await setTokenUri("ipfs://QmSUsofykmoLwA6zCHgVeG8YtkRZnDeKw48vCZadA3spxe/")
   // await lockTransfer()
-  pauseContract()
+  // pauseContract()
 }
 
 main('0xE34084ca3f96901F2A7541c24AB0FCFF072c7081')

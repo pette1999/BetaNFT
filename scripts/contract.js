@@ -110,20 +110,32 @@ async function main(proxyAddress) {
   // lock transfer
   const lockTransfer = async () => {
     const res = await token.methods.setLocked(true).send({from: myAddress, gas: 500000})
-    console.log(res)
+    const isLocked = await token.methods.isLocked().call()
+    console.log(`transactionHash: ${res['transactionHash']}`)
+    console.log(`Lock status: ${isLocked}`)
   }
 
   // set new token URI
   const setTokenUri = async (uri) => {
     const res = await token.methods.setBaseURI(uri).send({from: myAddress, gas: 500000})
-    console.log(res)
+    console.log(`transactionHash: ${res['transactionHash']}`)
+    console.log(`New Token Uri: ${uri}`)
+  }
+
+  // pause/unpause the contract
+  const pauseContract = async () => {
+    const res = await token.methods.togglePause().send({from: myAddress, gas: 500000})
+    const paused = await token.methods.paused().call()
+    console.log(`transactionHash: ${res['transactionHash']}`)
+    console.log(`Pause Status: ${paused}`)
   }
 
   // Call the mintNFT function
   // await mintNFT()
   // await web3_contractInfo()
-  await setTokenUri("ipfs://QmSUsofykmoLwA6zCHgVeG8YtkRZnDeKw48vCZadA3spxe/")
+  // await setTokenUri("ipfs://QmSUsofykmoLwA6zCHgVeG8YtkRZnDeKw48vCZadA3spxe/")
   // await lockTransfer()
+  pauseContract()
 }
 
 main('0xE34084ca3f96901F2A7541c24AB0FCFF072c7081')

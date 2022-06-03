@@ -36,6 +36,11 @@ contract BetaTest is ERC721AUpgradeable, OwnableUpgradeable {
         locked = false;
     }
 
+    function _beforeTokenTransfers(address from, address to, uint256 startTokenId, uint256 quantity) internal virtual override {
+      require(!locked, "The contract is locked");
+      _beforeTokenTransfers(from, to, startTokenId, quantity);
+    }
+
     function ownershipOf(uint256 index) public view returns (address) {
       return ownerOf(index);
     }

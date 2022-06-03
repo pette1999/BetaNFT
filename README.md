@@ -62,7 +62,7 @@ Install required dependencies:
 npm install
 ```
 
-Then make sure to add a ==.env== file:
+Then make sure to add a `.env` file:
 
 ```
 REACT_APP_ETHERSCAN_KEY='put your etherscan key'

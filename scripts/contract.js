@@ -6,7 +6,7 @@ const { ConsensusType } = require('@ethereumjs/common');
 dotenv.config();
 
 async function main(proxyAddress) {
-  HMY_TESTNET_RPC_URL = 'https://api.s0.b.hmny.io';
+  HMY_TESTNET_RPC_URL = 'https://api.harmony.one';
   const account1 = '0x271f70Ed8B8154010d06CE809D78f8A2665eFed9'
   const account1Secret = process.env.REACT_APP_PRIVATE_KEY
   const address = proxyAddress
@@ -90,7 +90,7 @@ async function main(proxyAddress) {
     const tx = {
       'from': myAddress,
       'to': address,
-      "value": 230000000000000,
+      "value": 0,
       'nonce': nonce,
       'gas': 500000,
       'data': token.methods.safeMint("0x271f70Ed8B8154010d06CE809D78f8A2665eFed9", 1).encodeABI()
@@ -133,11 +133,11 @@ async function main(proxyAddress) {
   }
 
   // Call the mintNFT function
-  // await mintNFT()
-  await web3_contractInfo()
+  await mintNFT()
+  // await web3_contractInfo()
   // await setTokenUri("ipfs://QmSUsofykmoLwA6zCHgVeG8YtkRZnDeKw48vCZadA3spxe/")
   // await lockTransfer()
   // pauseContract()
 }
 
-main('0xE34084ca3f96901F2A7541c24AB0FCFF072c7081')
+main('0xdf2cD430e88C364293c4B6894e3e82A416E0Bc91')

@@ -24,22 +24,22 @@ contract BetaTest is ERC721AUpgradeable, OwnableUpgradeable {
 
   function initialize() public initializer {
     __Ownable_init();
-    __ERC721A_init("Beta", "BETA");
+    __ERC721A_init("Beta Fellowship V1", "BETA");
     MAX_SUPPLY = 1500;
-    PRICE = 10 ether;
+    PRICE = 0.001 ether;
     MAX_PER_MINT = 1500;
     MAX_RESERVED_MINTS = 1500;
     RESERVED_MINTS = 0;
-    baseTokenURI = "ipfs://QmWKFFEHhwVNDx7eScp8XDP1wEQavV3SRDasCDKZt1mpHB/";
+    baseTokenURI = "ipfs://QmSUsofykmoLwA6zCHgVeG8YtkRZnDeKw48vCZadA3spxe/";
     baseExtension = ".json";
     paused = false;
     locked = false;
   }
 
-  function _beforeTokenTransfers(address from, address to, uint256 startTokenId, uint256 quantity) internal virtual override {
-    require(!locked, "The contract is locked");
-    _beforeTokenTransfers(from, to, startTokenId, quantity);
-  }
+  // function _beforeTokenTransfers(address from, address to, uint256 startTokenId, uint256 quantity) internal virtual override {
+  //   require(!locked, "The contract is locked");
+  //   _beforeTokenTransfers(from, to, startTokenId, quantity);
+  // }
 
   function ownershipOf(uint256 index) public view returns (address) {
     return ownerOf(index);

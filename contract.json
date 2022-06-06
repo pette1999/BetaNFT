@@ -1,0 +1,8 @@
+{
+  "name": "Beta Fellowship V1",
+  "description": "This NFT represent the membership of Beta Fellowship community. Each NFT holder will be able to access to the utilities of Beta Fellowship community, include but not limited to education contents, speaker's series with Beta Mentors.",
+  "image": "https://i.postimg.cc/tTCVq65B/0.png",
+  "external_link": "https://openseacreatures.io",
+  "seller_fee_basis_points": 100,
+  "fee_recipient": "0x271f70Ed8B8154010d06CE809D78f8A2665eFed9"
+}

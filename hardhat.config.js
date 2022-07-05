@@ -16,6 +16,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 const HARMONY_PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
+const POLYGON_TESTNET_URL = process.env.INFURA_POLYGON_URL
 const settings = {
   "optimizer": {
     "enabled": false,
@@ -74,9 +75,13 @@ module.exports = {
     rinkeby: {
       url: "https://eth-rinkeby.alchemyapi.io/v2/s-7EkIL5z19ZVTpOGVnM7imSNo44TACk",
       accounts: [`0x${HARMONY_PRIVATE_KEY}`]
-    }
+    },
+    polygon_testnet: {
+      url: POLYGON_TESTNET_URL,
+      accounts: [`0x${HARMONY_PRIVATE_KEY}`]
+    },
   },
   etherscan: {
-    apiKey: process.env.REACT_APP_ETHERSCAN_KEY,
+    apiKey: process.env.REACT_APP_POLYGON_KEY,
   },
 };

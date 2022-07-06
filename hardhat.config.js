@@ -73,7 +73,7 @@ module.exports = {
       accounts: [`0x${HARMONY_PRIVATE_KEY}`]
     },
     rinkeby: {
-      url: "https://eth-rinkeby.alchemyapi.io/v2/s-7EkIL5z19ZVTpOGVnM7imSNo44TACk",
+      url: POLYGON_TESTNET_URL,
       accounts: [`0x${HARMONY_PRIVATE_KEY}`]
     },
     polygon_testnet: {
